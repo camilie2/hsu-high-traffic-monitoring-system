@@ -24,7 +24,7 @@ const Text = styled.div`
   font-size: 16px;
   font-family: Pretendard;
   font-weight: 400;
-`
+`;
 
 
 function Footer() {
