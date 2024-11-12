@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const UserDiv = styled.div`
-  width: 200px;
-  height: 70px;
+  width: 270px;
+  height: 80px;
   border: 1.5px solid #BBBBBB;
   display: flex;
   border-radius: 8px;
