@@ -3,29 +3,26 @@ import styled from 'styled-components';
 
 const FooterDiv = styled.div`
   width: 100%;
-  height: 200px;
+  height: 100px;
   background-color: #EEEEEE;
-  align-items: flex-start;;
-  flex-direction: column;
-  font-size: 15px;
-  flex-shrink: 0;
   display: flex;
-
-  position : relative;
-  transform : translateY(500%);
-
-  padding-left: 250px;
-
-  flex-wrap: wrap;
+  flex-direction: column;
+  font-size: 10px; 
+  font-family: Pretendard;
+  font-weight: 400;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 20px;
+  padding-top: 10px; /* 패딩을 줄였습니다 */
 `;
 
 const Text = styled.div`
   color: #959595;
-  font-size: 16px;
-  font-family: Pretendard;
-  font-weight: 400;
+  font-size: 14px; /* 폰트 크기를 줄였습니다 */
+  margin-top: 3px; /* 간격을 줄였습니다 */
 `;
-
 
 function Footer() {
   return(
