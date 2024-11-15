@@ -3,29 +3,28 @@ import styled from 'styled-components';
 
 const FooterDiv = styled.div`
   width: 100%;
-  height: 200px;
+  height: 100px;
   background-color: #EEEEEE;
-  align-items: flex-start;;
-  flex-direction: column;
-  font-size: 15px;
-  flex-shrink: 0;
   display: flex;
-
-  position : relative;
-  transform : translateY(500%);
-
-  padding-left: 250px;
-
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: center;
+  font-size: 12px; 
+  font-family: Pretendard;
+  font-weight: 400;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding-left: 30px;
+  padding-top: 15px;
+  box-sizing: border-box;
 `;
 
 const Text = styled.div`
   color: #959595;
   font-size: 16px;
-  font-family: Pretendard;
-  font-weight: 400;
+  margin-top: 5px; 
 `;
-
 
 function Footer() {
   return(
