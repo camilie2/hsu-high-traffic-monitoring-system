@@ -34,12 +34,13 @@ const TitleText = styled.div`
   font-size: 35px;
   font-weight: 800;
   -webkit-text-stroke: 1px #000000; 
+   margin-left: 50px
 `;
 
 const Noti = styled.div`
   color: black;
   font-size: 22px;
-  margin-right: 8px;
+  margin-right: 10px;
 `;
 
 const Time = styled.div`

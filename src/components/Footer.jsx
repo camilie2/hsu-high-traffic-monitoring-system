@@ -7,21 +7,23 @@ const FooterDiv = styled.div`
   background-color: #EEEEEE;
   display: flex;
   flex-direction: column;
-  font-size: 10px; 
+  align-items: flex-start; 
+  justify-content: center;
+  font-size: 12px; 
   font-family: Pretendard;
   font-weight: 400;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  padding-left: 20px;
-  padding-top: 10px; /* 패딩을 줄였습니다 */
+  padding-left: 30px;
+  padding-top: 15px;
+  box-sizing: border-box;
 `;
 
 const Text = styled.div`
   color: #959595;
-  font-size: 14px; /* 폰트 크기를 줄였습니다 */
-  margin-top: 3px; /* 간격을 줄였습니다 */
+  font-size: 16px;
+  margin-top: 5px; 
 `;
 
 function Footer() {
