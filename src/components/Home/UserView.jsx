@@ -38,7 +38,12 @@ const UserDesc = styled.div`
 function UserView() {
     return(
       <UserDiv>
-          <UserPic>서비스 이미지
+          <UserPic>
+            <img
+                  style={{ width: '60px', height: '60px'}}
+                  src={userIcon}
+                  alt="user"
+            />
           </UserPic>
           <TextBox>
             <UserName>서비스 A
