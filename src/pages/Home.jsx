@@ -1,6 +1,6 @@
 import React from 'react';
 import UserView from '../components/Home/UserView';
-import View1 from '../components/Home/View1';
+import View1 from '../components/Home/TrafficData';
 import styled from 'styled-components';
 
 const BG = styled.div`
