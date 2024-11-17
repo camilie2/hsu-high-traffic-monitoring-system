@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  min-height: 55vh; 
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+`;
+
 const FooterDiv = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100px;
   background-color: #EEEEEE;
   display: flex;
@@ -12,12 +19,10 @@ const FooterDiv = styled.div`
   font-size: 12px; 
   font-family: Pretendard;
   font-weight: 400;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   padding-left: 30px;
   padding-top: 15px;
   box-sizing: border-box;
+  margin-top: auto; /* 푸터를 하단에 고정 */
 `;
 
 const Text = styled.div`
@@ -27,11 +32,13 @@ const Text = styled.div`
 `;
 
 function Footer() {
-  return(
-    <FooterDiv>
+  return (
+    <Container>
+      <FooterDiv>
         <Text>2024 데이터통신</Text>
         <Text>SERVER 이상원 박상우 FRONTEND 김나은 장다연</Text>
-    </FooterDiv>
+      </FooterDiv>
+    </Container>
   );
 }
 
