@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import userIcon from '../../assets/userIcon.png'
 
 const UserDiv = styled.div`
   width: 270px;
@@ -37,10 +38,16 @@ const UserDesc = styled.div`
 function UserView() {
     return(
       <UserDiv>
-          <UserPic>서비스 이미지
+          <UserPic>
+            <img
+                  style={{ width: '60px', height: '60px'}}
+                  src={userIcon}
+                  alt="user"
+            />
           </UserPic>
           <TextBox>
-            <UserName>서비스 이름</UserName>
+            <UserName>서비스 A
+            </UserName>
             <UserDesc>환영합니다.</UserDesc>
           </TextBox>
           
