@@ -19,14 +19,14 @@ const HeaderDiv = styled.div`
   font-family: Pretendard;
   font-weight: 400;
   z-index: 1000;
-  margin-top: 10px;
+  padding-top: 5px;
   padding-bottom: 10px;
 `;
 
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 1200px;
+  margin-left: 1150px; 
 `;
 
 const TitleText = styled.div`
@@ -34,7 +34,7 @@ const TitleText = styled.div`
   font-size: 35px;
   font-weight: 800;
   -webkit-text-stroke: 1px #000000; 
-   margin-left: 50px
+  margin-left: 50px;
 `;
 
 const Noti = styled.div`
@@ -48,6 +48,7 @@ const Time = styled.div`
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
+  margin-right: 80px; 
 `;
 
 function Header() {
