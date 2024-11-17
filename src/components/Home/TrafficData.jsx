@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const TrafficData = () => {
   const [trafficData, setTrafficData] = useState([]);
@@ -73,12 +75,15 @@ const TrafficData = () => {
     },
   };
 
+
+  const [value, onChange] = useState(new Date());
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
-      <div style={{ gridColumn: '1 / span 1', gridRow: '1 / span 1', textAlign: 'center' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '20px',  maxWidth: '1200px', maxHeight: '800px' }}>
+      <div style={{ gridColumn: '1 / span 1', gridRow: '1 / span 1', textAlign: 'center', padding: '100px'}}>
         <h3>경보창</h3>
         <div style={{ marginTop: '20px', color: 'gray' }}>
           {recentAlerts.length === 0 ? "현재 경고가 없습니다." : (
@@ -92,15 +97,16 @@ const TrafficData = () => {
           )}
         </div>
       </div>
-      <div style={{ gridColumn: '2 / span 1', gridRow: '1 / span 1', textAlign: 'center' }}>
-        <h3>CPU Usage</h3>
-        <Line data={generateChartData('cpuUsage', 'CPU Usage (%)')} options={chartOptions} />
+      <div style={{ gridColumn: '2 / span 1', gridRow: '1 / span 1', textAlign: 'center', maxWidth: '550px', maxHeight: '350px', margin: '0 auto'}}>
+        <h3>달력 보기</h3>
+        <Calendar></Calendar>
+        {/* <Line data={generateChartData('cpuUsage', 'CPU Usage (%)')} options={chartOptions} /> */}
       </div>
-      <div style={{ gridColumn: '1 / span 1', gridRow: '2 / span 1', textAlign: 'center' }}>
+      <div style={{ gridColumn: '1 / span 1', gridRow: '2 / span 1', textAlign: 'center',  maxWidth: '550px', maxHeight: '350px'}}>
         <h3>Network In</h3>
         <Line data={generateChartData('networkIn', 'Network In (bytes)')} options={chartOptions} />
       </div>
-      <div style={{ gridColumn: '2 / span 1', gridRow: '2 / span 1', textAlign: 'center' }}>
+      <div style={{ gridColumn: '2 / span 1', gridRow: '2 / span 1', textAlign: 'center',  maxWidth: '550px', maxHeight: '350px' }}>
         <h3>Network Out</h3>
         <Line data={generateChartData('networkOut', 'Network Out (bytes)')} options={chartOptions} />
       </div>

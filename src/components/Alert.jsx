@@ -4,10 +4,10 @@ import styled from 'styled-components';
 const AlertContainer = styled.div`
   position: absolute;
   top: 60px;
-  right: 0;
+  right: -40px;
   width: 230px;
   text-align: center;
-  font-family: Pretendard, sans-serif;
+  font-family: Pretendard;
   color: black;
   background-color: white;
   border-radius: 8px;
@@ -21,12 +21,13 @@ const AlertList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  font-size: 14px;
 
   & > li {
     margin: 5px 10px;
     padding: 5px 10px;
     border-radius: 50px;
-    background-color: #e2e8f0;
+    background-color: #EEEEEE;
     text-align: left;
   }
 
@@ -40,25 +41,24 @@ const AlertList = styled.ul`
   }
 `;
 
-// ref를 AlertContainer에 전달하도록 수정
 const Alert = forwardRef((props, ref) => (
   <AlertContainer ref={ref}>
     <AlertList>
       <li>2024.01.01</li>
       <li>알림1</li>
-      <li style={{ fontWeight: 'bold' }}>00:00</li>
+      <li>00:00</li>
     </AlertList>
     <hr />
     <AlertList>
       <li>2024.01.02</li>
       <li>알림2</li>
-      <li style={{ fontWeight: 'bold' }}>00:00</li>
+      <li>00:00</li>
     </AlertList>
     <hr />
     <AlertList>
       <li>2024.01.03</li>
       <li>알림3</li>
-      <li style={{ fontWeight: 'bold' }}>00:00</li>
+      <li>00:00</li>
     </AlertList>
   </AlertContainer>
 ));
