@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  min-height: 55vh; 
+  min-height: 40vh; 
   width: 100%; 
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const FooterDiv = styled.div`
   width: 100vw;
-  height: 100px;
+  height: 150px;
   background-color: #EEEEEE;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@ const FooterDiv = styled.div`
   font-size: 12px; 
   font-family: Pretendard;
   font-weight: 400;
-  padding-left: 30px;
+  padding-left: 130px;
   padding-top: 15px;
   box-sizing: border-box;
   margin-top: auto; /* 푸터를 하단에 고정 */

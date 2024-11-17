@@ -84,7 +84,7 @@ const TrafficData = () => {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '20px',  maxWidth: '1200px', maxHeight: '800px' }}>
       <div style={{ gridColumn: '1 / span 1', gridRow: '1 / span 1', textAlign: 'center', padding: '100px'}}>
-        <h3>경보창</h3>
+        <h3>경고창</h3>
         <div style={{ marginTop: '20px', color: 'gray' }}>
           {recentAlerts.length === 0 ? "현재 경고가 없습니다." : (
             <ul style={{ listStyleType: 'none', padding: 0 }}>
