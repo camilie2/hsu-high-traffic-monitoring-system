@@ -1,41 +1,109 @@
 import React, { useState, useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
 
 const TrafficData = () => {
-  const [trafficData, setTrafficData] = useState(null);
+  const [trafficData, setTrafficData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [recentAlerts, setRecentAlerts] = useState([]); // 최근 알람 메시지 상태
 
-  useEffect(() => {
-    // API 호출
+  const fetchData = () => {
     fetch('https://z3qkytq58d.execute-api.ap-northeast-2.amazonaws.com/traffic-1-stage/traffic')
       .then((response) => response.json())
       .then((data) => {
-        setTrafficData(data);
+        const parsedBody = JSON.parse(data.body);
+        const timestamp = new Date().toLocaleTimeString();
+        const trafficEntry = { ...parsedBody, timestamp };
+
+        const alarmMessages = [];
+        if (parsedBody.alarms.networkInAlarm) alarmMessages.push(parsedBody.alarmMessages[0]);
+        if (parsedBody.alarms.networkOutAlarm) alarmMessages.push(parsedBody.alarmMessages[1]);
+        if (parsedBody.alarms.cpuUsageAlarm) alarmMessages.push("CPU 사용률이 위험 수치를 초과했습니다!");
+
+        saveDataToLocalStorage(trafficEntry, alarmMessages);
         setLoading(false);
-        console.log(data)
       })
       .catch((err) => {
-        setError('데이터를 가져오는 데 오류가 발생했습니다.');
+        setError('Error fetching data');
         setLoading(false);
       });
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 호출
+  };
 
-  if (loading) {
-    return <div>로딩 중…</div>;
-  }
+  const saveDataToLocalStorage = (data, alarmMessages) => {
+    const currentData = JSON.parse(localStorage.getItem('trafficData')) || [];
+    const updatedData = [...currentData, data].slice(-10);
+    localStorage.setItem('trafficData', JSON.stringify(updatedData));
+    setTrafficData(updatedData);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+    setRecentAlerts((prevAlerts) => {
+      const updatedAlerts = alarmMessages.length > 0
+        ? [{ time: data.timestamp, message: alarmMessages.join(' '), id: Date.now() }, ...prevAlerts].slice(0, 10)
+        : prevAlerts;
+      return updatedAlerts;
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 300000); 
+    return () => clearInterval(interval); 
+  }, []);
+
+  const generateChartData = (dataKey, label) => ({
+    labels: trafficData.map((entry) => entry.timestamp),
+    datasets: [
+      {
+        label: label,
+        data: trafficData.map((entry) => entry[dataKey]),
+        fill: true,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        tension: 0.4,
+      },
+    ],
+  });
+
+  const chartOptions = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h1>Traffic Data</h1>
-      <ul>
-        <li><strong>CPU Usage:</strong> {trafficData.cpuUsage}%</li>
-        <li><strong>Network In:</strong> {trafficData.networkIn} bytes</li>
-        <li><strong>Network Out:</strong> {trafficData.networkOut} bytes</li>
-      </ul>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '20px' }}>
+      <div style={{ gridColumn: '1 / span 1', gridRow: '1 / span 1', textAlign: 'center' }}>
+        <h3>경보창</h3>
+        <div style={{ marginTop: '20px', color: 'gray' }}>
+          {recentAlerts.length === 0 ? "현재 경고가 없습니다." : (
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              {recentAlerts.map((alert) => (
+                <li key={alert.id} style={{ marginBottom: '10px', color: 'red', fontWeight: 'bold' }}>
+                  [{alert.time}] {alert.message}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+      <div style={{ gridColumn: '2 / span 1', gridRow: '1 / span 1', textAlign: 'center' }}>
+        <h3>CPU Usage</h3>
+        <Line data={generateChartData('cpuUsage', 'CPU Usage (%)')} options={chartOptions} />
+      </div>
+      <div style={{ gridColumn: '1 / span 1', gridRow: '2 / span 1', textAlign: 'center' }}>
+        <h3>Network In</h3>
+        <Line data={generateChartData('networkIn', 'Network In (bytes)')} options={chartOptions} />
+      </div>
+      <div style={{ gridColumn: '2 / span 1', gridRow: '2 / span 1', textAlign: 'center' }}>
+        <h3>Network Out</h3>
+        <Line data={generateChartData('networkOut', 'Network Out (bytes)')} options={chartOptions} />
+      </div>
     </div>
   );
 };
