@@ -6,13 +6,22 @@ import styled from 'styled-components';
 const BG = styled.div`
   background-color: white;
   width: 100%;
-  padding: 60px 250px;
+  /*padding: 60px 250px;*/
+  padding: 30px 150px 0px 150px;
+  margin: 0 auto;
 `;
+
+const TopBox = styled.div`
+  padding-left: 0;
+`
 
 function Home() {
   return(
     <BG>
-      <UserView></UserView>
+      <TopBox>
+        <UserView></UserView>
+      </TopBox>
+      
       <View1></View1>
     </BG>
     

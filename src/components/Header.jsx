@@ -20,6 +20,7 @@ const HeaderDiv = styled.div`
   font-family: Pretendard;
   font-weight: 400;
   z-index: 1000;
+  padding-left: 100px;
   padding-top: 5px;
   padding-bottom: 10px;
 `;
@@ -27,16 +28,15 @@ const HeaderDiv = styled.div`
 const MenuContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 1150px; 
-  //margin-left: 1200px;
-  //position: relative;
+  margin-left: 950px; 
+  /*margin-left: 1200px;
+  position: relative;*/
 `;
 
 const TitleText = styled.div`
-  color: #0C70F2; 
+  color: Black; 
   font-size: 35px;
   font-weight: 800;
-  -webkit-text-stroke: 1px #000000; 
   margin-left: 50px;
 ,`;
 
