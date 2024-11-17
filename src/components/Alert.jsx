@@ -22,6 +22,7 @@ const AlertList = styled.ul`
   padding: 0;
   margin: 0;
   font-size: 14px;
+  text-align: center;
 
   & > li {
     margin: 5px 10px;
@@ -36,6 +37,10 @@ const AlertList = styled.ul`
     text-align: center;
   }
 
+  & > li:second-child {
+    color: #CA4646;
+  }
+
   & + hr {
     margin: 10px 0;
   }
@@ -44,21 +49,21 @@ const AlertList = styled.ul`
 const Alert = forwardRef((props, ref) => (
   <AlertContainer ref={ref}>
     <AlertList>
-      <li>2024.01.01</li>
-      <li>알림1</li>
-      <li>00:00</li>
+      <li>2024.11.17</li>
+      <li>트래픽 경고</li>
+      <li>20:21</li>
     </AlertList>
     <hr />
     <AlertList>
-      <li>2024.01.02</li>
-      <li>알림2</li>
-      <li>00:00</li>
+      <li>2024.11.16</li>
+      <li>트래픽 경고</li>
+      <li>16:05</li>
     </AlertList>
     <hr />
     <AlertList>
-      <li>2024.01.03</li>
-      <li>알림3</li>
-      <li>00:00</li>
+      <li>2024.11.16</li>
+      <li>트래픽 경고</li>
+      <li>14:48</li>
     </AlertList>
   </AlertContainer>
 ));
