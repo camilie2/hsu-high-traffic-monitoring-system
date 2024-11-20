@@ -1,8 +1,3 @@
-# React + Vite
+# AWS 기반 웹서버 대규모 트래픽 이상 감지 및 실시간 모니터링 시스템 구축
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+AWS를 이용한 트래픽 이상 감지 서비스 웹사이트
