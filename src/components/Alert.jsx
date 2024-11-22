@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const AlertContainer = styled.div`
@@ -6,6 +6,7 @@ const AlertContainer = styled.div`
   top: 60px;
   right: -40px;
   width: 230px;
+  font-size: 20px;
   text-align: center;
   font-family: Pretendard;
   color: black;
@@ -46,26 +47,53 @@ const AlertList = styled.ul`
   }
 `;
 
-const Alert = forwardRef((props, ref) => (
-  <AlertContainer ref={ref}>
-    <AlertList>
-      <li>2024.11.17</li>
-      <li>트래픽 경고</li>
-      <li>20:21</li>
-    </AlertList>
-    <hr />
-    <AlertList>
-      <li>2024.11.16</li>
-      <li>트래픽 경고</li>
-      <li>16:05</li>
-    </AlertList>
-    <hr />
-    <AlertList>
-      <li>2024.11.16</li>
-      <li>트래픽 경고</li>
-      <li>14:48</li>
-    </AlertList>
-  </AlertContainer>
-));
+const Alert = forwardRef((props, ref) => {
+  const [recentAlerts, setRecentAlerts] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = () => {
+      fetch('https://z3qkytq58d.execute-api.ap-northeast-2.amazonaws.com/traffic-1-stage/traffic')
+        .then((response) => response.json())
+        .then((data) => {
+          const parsedBody = JSON.parse(data.body);
+          const timestamp = new Date().toLocaleTimeString();
+          const alarmMessages = [];
+
+          if (parsedBody.alarms.networkInAlarm) alarmMessages.push(parsedBody.alarmMessages[0]);
+          if (parsedBody.alarms.networkOutAlarm) alarmMessages.push(parsedBody.alarmMessages[1]);
+          if (parsedBody.alarms.cpuUsageAlarm) alarmMessages.push("CPU 사용률이 위험 수치를 초과했습니다!");
+
+          setRecentAlerts((prevAlerts) => [
+            ...[{ time: timestamp, message: alarmMessages.join(' '), id: Date.now() }],
+            ...prevAlerts,
+          ].slice(0, 10));
+        })
+        .catch((err) => {
+          setError('경고 없음');
+          console.error(err);
+        });
+    };
+
+    fetchData();
+  }, []); // 빈 배열로 useEffect는 한 번만 실행
+
+  return (
+    <AlertContainer ref={ref}>
+      <AlertList>
+        {recentAlerts.length === 0 ? (
+          <li>현재 경고가 없습니다.</li>
+        ) : (
+          recentAlerts.map((alert) => (
+            <li key={alert.id}>
+              [{alert.time}] {alert.message}
+            </li>
+          ))
+        )}
+      </AlertList>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+    </AlertContainer>
+  );
+});
 
 export default Alert;
